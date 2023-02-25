@@ -1,6 +1,10 @@
 import logo from '../assets/logo.png';
 
-export default function Navbar() {
+export default function Navbar({ setNavToCart }) {
+  const handleNav = (route) => {
+    route === 'home' ? setNavToCart(false) : setNavToCart(true);
+  };
+
   return (
     <div>
       <nav className="bg-[#171C2A] py-4">
@@ -10,14 +14,24 @@ export default function Navbar() {
           </a>
 
           <div className="flex gap-4">
-            <a href="#home" className="navHome" id="lws-home">
+            <button
+              type="submit"
+              className="navHome"
+              id="lws-home"
+              onClick={() => handleNav('home')}
+            >
               {' '}
               Home{' '}
-            </a>
-            <a href="cart.html" className="navCart" id="lws-cart">
+            </button>
+            <button
+              type="submit"
+              className="navCart"
+              id="lws-cart"
+              onClick={() => handleNav('cart')}
+            >
               <i className="text-xl fa-sharp fa-solid fa-bag-shopping"></i>
               <span id="lws-totalCart">0</span>
-            </a>
+            </button>
           </div>
         </div>
       </nav>

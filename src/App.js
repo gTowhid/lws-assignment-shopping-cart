@@ -1,14 +1,17 @@
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
-// import CartPage from './components/CartPage';
+import { useState } from 'react';
+import CartPage from './components/CartPage';
 
 function App() {
+  const [navToCart, setNavToCart] = useState(false);
+
   return (
     <div>
-      <Navbar />;
+      <Navbar setNavToCart={setNavToCart} />;
       <main class="py-16">
-        <Homepage />
-        {/* <CartPage /> */}
+        {!navToCart && <Homepage />}
+        {navToCart && <CartPage />}
       </main>
     </div>
   );
