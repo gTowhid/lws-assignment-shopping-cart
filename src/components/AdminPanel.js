@@ -1,4 +1,22 @@
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/inventory/actions";
+
+const product = {
+  productName: '',
+  category: '',
+  imageUrl: '',
+  price: 0,
+  inventory: 0,
+};
+
 export default function AdminPanel() {
+  const dispatch = useDispatch();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(addProduct(product));
+  };
+
   return (
     <div className="formContainer">
       <h4 className="formTitle">Add New Product</h4>
@@ -10,6 +28,7 @@ export default function AdminPanel() {
             id="lws-inputName"
             type="text"
             required
+            onChange={(e) => product.productName = e.target.value}
           />
         </div>
 
@@ -20,6 +39,7 @@ export default function AdminPanel() {
             id="lws-inputCategory"
             type="text"
             required
+            onChange={(e) => product.category = e.target.value}
           />
         </div>
 
@@ -30,6 +50,7 @@ export default function AdminPanel() {
             id="lws-inputImage"
             type="text"
             required
+            onChange={(e) => product.imageUrl = e.target.value}
           />
         </div>
 
@@ -41,6 +62,7 @@ export default function AdminPanel() {
               type="number"
               id="lws-inputPrice"
               required
+              onChange={(e) => product.price = e.target.value}
             />
           </div>
 
@@ -51,11 +73,12 @@ export default function AdminPanel() {
               type="number"
               id="lws-inputQuantity"
               required
+              onChange={(e) => product.inventory = e.target.value}
             />
           </div>
         </div>
 
-        <button type="submit" id="lws-inputSubmit" className="submit">
+        <button type="submit" id="lws-inputSubmit" className="submit" onClick={(e) => submitHandler(e)}>
           Add Product
         </button>
       </form>

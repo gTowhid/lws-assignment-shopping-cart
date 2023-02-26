@@ -1,6 +1,14 @@
 import logo from '../assets/logo.png';
+import { useSelector } from 'react-redux';
 
 export default function Navbar({ setNavToCart }) {
+  const states = useSelector((state) => state);
+
+  const cartTotal = states.reduce(
+    (total, state) => state.cartQuantity + total,
+    0
+  );
+
   return (
     <div>
       <nav className="bg-[#171C2A] py-4">
@@ -26,7 +34,7 @@ export default function Navbar({ setNavToCart }) {
               onClick={() => setNavToCart(true)}
             >
               <i className="text-xl fa-sharp fa-solid fa-bag-shopping"></i>
-              <span id="lws-totalCart">0</span>
+              <span id="lws-totalCart">{cartTotal}</span>
             </button>
           </div>
         </div>
